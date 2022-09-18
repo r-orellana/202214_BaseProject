@@ -57,7 +57,7 @@ describe('SocioService', () => {
   });
 
   it('findOne should throw an exception for an invalid socio', async () => {
-    await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "The socio with the given id was not found")
+    await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "The member with the given id was not found")
   });
 
   it('create should return a new socio', async () => {
@@ -98,7 +98,7 @@ describe('SocioService', () => {
     socio = {
       ...socio, usuario: "New usuario", email: "New email"
     }
-    await expect(() => service.update("0", socio)).rejects.toHaveProperty("message", "The socio with the given id was not found")
+    await expect(() => service.update("0", socio)).rejects.toHaveProperty("message", "The member with the given id was not found")
   });
 
   it('delete should remove a socio', async () => {
@@ -112,7 +112,7 @@ describe('SocioService', () => {
   it('delete should throw an exception for an invalid socio', async () => {
     const socio: SocioEntity = sociosList[0];
     await service.delete(socio.id);
-    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The socio with the given id was not found")
+    await expect(() => service.delete("0")).rejects.toHaveProperty("message", "The member with the given id was not found")
   });
  
 });
