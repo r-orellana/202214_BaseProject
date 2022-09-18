@@ -2,24 +2,24 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { ClubSocioService } from './club-socio.service';
 
-@Controller('clubes')
+@Controller('clubs')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ClubSocioController {
    constructor(private readonly clubSocioService: ClubSocioService){}
 
-   @Post(':clubId/socios/:socioId')
-   async addMemberToClub(@Param('clubId') clubId: string, @Param('socioId') socioId: string){
+   @Post(':clubId/members/:memberId')
+   async addMemberToClub(@Param('clubId') clubId: string, @Param('memberId') socioId: string){
        return await this.clubSocioService.addMemberToClub(clubId, socioId);
    }
 
-   @Get(':clubId/socios')
+   @Get(':clubId/members')
    async findMembersFromClub(@Param('clubId') clubId: string){
        return await this.clubSocioService.findMembersFromClub(clubId);
    }
 
-    @Delete(':clubId/socios/:socioId')
+    @Delete(':clubId/members/:memberId')
     @HttpCode(204)
-    async deleteMemberFromClub(@Param('clubId') clubId: string, @Param('socioId') socioId: string){
+    async deleteMemberFromClub(@Param('clubId') clubId: string, @Param('memberId') socioId: string){
        return await this.clubSocioService.deleteMemberFromClub(clubId, socioId);
     }
 
