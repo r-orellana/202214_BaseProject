@@ -86,7 +86,7 @@ describe('ClubSocioService', () => {
       descripcion: faker.lorem.sentence(), 
     })
 
-    await expect(() => service.addMemberToClub(newClub.id, "0")).rejects.toHaveProperty("message", "The socio with the given id was not found");
+    await expect(() => service.addMemberToClub(newClub.id, "0")).rejects.toHaveProperty("message", "The member with the given id was not found");
   });
 
   it('addMemberToClub should throw an exception for an invalid club', async () => {
@@ -123,7 +123,7 @@ describe('ClubSocioService', () => {
   });
 
   it('deleteMemberFromClub should thrown an exception for an invalid socio', async () => {
-    await expect(()=> service.deleteMemberFromClub(club.id, "0")).rejects.toHaveProperty("message", "The socio with the given id was not found"); 
+    await expect(()=> service.deleteMemberFromClub(club.id, "0")).rejects.toHaveProperty("message", "The member with the given id was not found"); 
   });
 
   it('deleteMemberFromClub should thrown an exception for an invalid club', async () => {
@@ -138,7 +138,7 @@ describe('ClubSocioService', () => {
       fecha_nacimiento: faker.date.birthdate(), 
     });
 
-    await expect(()=> service.deleteMemberFromClub(club.id, newSocio.id)).rejects.toHaveProperty("message", "The socio with the given id is not associated to the club"); 
+    await expect(()=> service.deleteMemberFromClub(club.id, newSocio.id)).rejects.toHaveProperty("message", "The member with the given id is not associated to the club"); 
   }); 
 
 });
