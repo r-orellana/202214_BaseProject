@@ -108,6 +108,25 @@ describe('ClubSocioService', () => {
     await expect(()=> service.findMembersFromClub("0")).rejects.toHaveProperty("message", "The club with the given id was not found"); 
   });
 
+  it('findMemberFromClub should return socios by club', async ()=>{
+
+    const newSocio: SocioEntity = await socioRepository.save({
+      usuario: faker.internet.userName(), 
+      email: faker.internet.email(),
+      fecha_nacimiento: faker.date.birthdate(), 
+    });
+
+    const newClub: ClubEntity = await clubRepository.save({
+      nombre: faker.company.name(), 
+      fecha_fundacion: faker.date.birthdate(), 
+      imagen: faker.image.imageUrl(), 
+      descripcion: faker.lorem.sentence(), 
+    })
+
+    const result: ClubEntity = await service.addMemberToClub(newClub.id, newSocio.id);
+    const socio: SocioEntity = await service.findMemberFromClub(newClub.id, newSocio.id);
+    expect(socio.id == newClub.id)
+  });
 
 
   it('deleteMemberFromClub should remove an socio from a club', async () => {
