@@ -58,6 +58,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Dependences
+```bash
+npm install --save @nestjs/typeorm typeorm
+npm install pg --save
+npm install sqlite3 --save
+npm install @faker-js/faker --save-dev
+npm install class-validator --save
+```
+
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
