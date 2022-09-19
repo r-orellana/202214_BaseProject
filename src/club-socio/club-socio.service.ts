@@ -73,5 +73,23 @@ export class ClubSocioService {
 
       club.socios = club.socios.filter(e => e.id !== socioId);
       await this.clubRepository.save(club);
-    }  
+    }
+    
+    async updateMembersFromClub(clubId: string, socios: SocioEntity[]): Promise<ClubEntity> {
+      const club: ClubEntity = await this.clubRepository.findOne({where: { id: clubId },relations: ['socios']});
+  
+      if (!club)
+        throw new BusinessLogicException("The club with the given id was not found", BusinessError.NOT_FOUND);
+  
+      for (let i = 0; i < socios.length; i++) {
+        const socio: SocioEntity = await this.socioRepository.findOne({where: { id: socios[i].id }});
+        if (!socio)
+          throw new BusinessLogicException("The member with the given id is not associated to the club",BusinessError.NOT_FOUND);
+      }
+  
+      club.socios = socios;
+      return await this.clubRepository.save(club);
+    }
+
+
 }
